@@ -1,0 +1,24 @@
+{
+  "name": "practice",
+  "version": "1.0.0",
+  "description": "practice",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chipanda/practice.git"
+  },
+  "author": "xinjian.huang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chipanda/practice/issues"
+  },
+  "homepage": "https://github.com/chipanda/practice#readme",
+  "devDependencies": {
+    "eslint": "^5.14.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0"
+  }
+}
