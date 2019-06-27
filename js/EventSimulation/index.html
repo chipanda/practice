@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>事件模拟</title>
+  <style>
+    #level1 {
+      padding: 40px;
+      background: red;
+    }
+    #level2 {
+      padding: 40px;
+      background: blue;
+    }
+    #level3 {
+      padding: 40px;
+      background: yellow;
+    }
+    #level4 {
+      padding: 40px;
+      background: orange;
+    }
+    button {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <div id="level1">
+    level1 div
+    <div id="level2">
+      level2 div
+      <span id="level3">
+        level3 span
+        <a id="level4">
+          level4 a
+        </a>
+      </span>
+    </div>
+  </div>
+  <div id="button1">按空格键：js调用level2的点击事件</div>
+  <div id="button2">按回车键：level2派发一个点击事件</div>
+</body>
+<!-- 点击事件 -->
+<script>
+  document.addEventListener('keyup', function(event) {
+    var keyCode = event.keyCode + '';
+    console.log('keyup', keyCode);
+    if (keyCode === '32') {
+      // 空格
+      jsCallClick();
+    } else if (keyCode === '13') {
+      // 回车
+      domDispatchEvent();
+    }
+  })
+  var level2 = document.getElementById('level2');
+  function jsCallClick() {
+    level2.click();
+  }
+  function domDispatchEvent() {
+    var type = 'click'; //要触发的事件类型
+    var bubbles = true; //事件是否可以冒泡
+    var cancelable = true; //事件是否可以阻止浏览器默认事件
+    var view = document.defaultView; //与事件关联的视图，该属性默认即可，不管
+    var detail = 0;
+    var screenX = 0;
+    var screenY = 0;
+    var clientX = 0;
+    var clientY = 0;
+    var ctrlKey = false; //是否按下ctrl
+    var altKey = false; //是否按下alt
+    var shiftKey = false;
+    var metaKey = false;
+    var button = 0;//表示按下哪一个鼠标键
+    var relatedTarget = null; //模拟mousemove或者out时候用到，与事件相关的对象
+
+    var event = document.createEvent('MouseEvents');
+    event.initMouseEvent(type, bubbles)//, cancelable, view, detail, screenX, screenY, clientX, clientY,
+       //ctrlKey, altKey, shiftKey, metaKey, button, relatedTarget);
+    level2.dispatchEvent(event);
+  }
+</script>
+<!-- 事件监听 -->
+<script>
+    // #document
+    document.addEventListener('click', function(event) {
+      console.log('document capture isTarget:', event.target  === event.currentTarget, event)
+    }, {
+      capture: true,
+    });
+    document.addEventListener('click', function(event) {
+      console.log('document bubble isTarget:', event.target  === event.currentTarget);
+    }, {
+      capture: false,
+    });
+    // html
+    document.documentElement.addEventListener('click', function() {
+      console.log('document.documentElement capture isTarget:', event.target  === event.currentTarget)
+    }, {
+      capture: true,
+    });
+    document.documentElement.addEventListener('click', function(event) {
+      console.log('document.documentElement bubble isTarget:', event.target  === event.currentTarget);
+    }, {
+      capture: false,
+    });
+
+    var level1 = document.getElementById('level1');
+    var level2 = document.getElementById('level2');
+    var level3 = document.getElementById('level3');
+    var level4 = document.getElementById('level4');
+    // div level1
+    level1.addEventListener('click', function() {
+      console.log('level1 capture isTarget:', event.target  === event.currentTarget)
+    }, {
+      capture: true,
+    });
+    level1.addEventListener('click', function(event) {
+      console.log('level1 bubble isTarget:', event.target  === event.currentTarget);
+    }, {
+      capture: false,
+    });
+    // div level2
+    level2.addEventListener('click', function() {
+      console.log('level2 capture isTarget:', event.target  === event.currentTarget)
+    }, {
+      capture: true,
+    });
+    level2.addEventListener('click', function() {
+      console.log('level2 bubble isTarget:', event.target  === event.currentTarget)
+    }, {
+      capture: false,
+    });
+    // div level3
+    level3.addEventListener('click', function() {
+      console.log('level3 capture isTarget:', event.target  === event.currentTarget)
+    }, {
+      capture: true,
+    });
+    level3.addEventListener('click', function() {
+      console.log('level3 bubble isTarget:', event.target  === event.currentTarget)
+    }, {
+      capture: false,
+    });
+    // div level4
+    level4.addEventListener('click', function() {
+      console.log('level4 capture isTarget:', event.target  === event.currentTarget)
+    }, {
+      capture: true,
+    });
+    level4.addEventListener('click', function() {
+      console.log('level4 bubble isTarget:', event.target  === event.currentTarget)
+    }, {
+      capture: false,
+    });
+  </script>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>事件机制</title>
+  <style>
+    #level1 {
+      padding: 40px;
+      background: red;
+    }
+    #level2 {
+      padding: 40px;
+      background: blue;
+    }
+    #level3 {
+      padding: 40px;
+      background: yellow;
+    }
+    #level4 {
+      padding: 40px;
+      background: orange;
+    }
+  </style>
+</head>
+<body>
+  <div id="level1">
+    level1 div
+    <div id="level2">
+      level2 div
+      <span id="level3">
+        level3 span
+        <a id="level4">
+          level4 a
+        </a>
+      </span>
+    </div>
+  </div>
+</body>
+<script>
+  // #document
+  document.addEventListener('click', function(event) {
+    console.log('document capture isTarget:', event.target  === event.currentTarget)
+  }, {
+    capture: true,
+  });
+  document.addEventListener('click', function(event) {
+    console.log('document bubble isTarget:', event.target  === event.currentTarget);
+  }, {
+    capture: false,
+  });
+  // html
+  document.documentElement.addEventListener('click', function() {
+    console.log('document.documentElement capture isTarget:', event.target  === event.currentTarget)
+  }, {
+    capture: true,
+  });
+  document.documentElement.addEventListener('click', function(event) {
+    console.log('document.documentElement bubble isTarget:', event.target  === event.currentTarget);
+  }, {
+    capture: false,
+  });
+
+  var level1 = document.getElementById('level1');
+  var level2 = document.getElementById('level2');
+  var level3 = document.getElementById('level3');
+  var level4 = document.getElementById('level4');
+  // div level1
+  level1.addEventListener('click', function() {
+    console.log('level1 capture isTarget:', event.target  === event.currentTarget)
+  }, {
+    capture: true,
+  });
+  level1.addEventListener('click', function(event) {
+    console.log('level1 bubble isTarget:', event.target  === event.currentTarget);
+  }, {
+    capture: false,
+  });
+  // div level2
+  level2.addEventListener('click', function() {
+    console.log('level2 capture isTarget:', event.target  === event.currentTarget)
+  }, {
+    capture: true,
+  });
+  level2.addEventListener('click', function() {
+    console.log('level2 bubble isTarget:', event.target  === event.currentTarget)
+  }, {
+    capture: false,
+  });
+  // div level3
+  level3.addEventListener('click', function() {
+    console.log('level3 capture isTarget:', event.target  === event.currentTarget)
+  }, {
+    capture: true,
+  });
+  level3.addEventListener('click', function() {
+    console.log('level3 bubble isTarget:', event.target  === event.currentTarget)
+  }, {
+    capture: false,
+  });
+  // div level4
+  level4.addEventListener('click', function() {
+    console.log('level4 capture isTarget:', event.target  === event.currentTarget)
+  }, {
+    capture: true,
+  });
+  level4.addEventListener('click', function() {
+    console.log('level4 bubble isTarget:', event.target  === event.currentTarget)
+  }, {
+    capture: false,
+  });
+</script>
+</html>

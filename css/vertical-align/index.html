@@ -5,8 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>vertical align</title>
+  <style>
+    section {
+      margin-top: 20px;
+    }
+    .title {
+      margin-bottom: 10px;
+    }
+    .demo {
+      border: 1px solid red;
+      line-height: 12px;
+      height: 12px;
+      margin: 5px;
+      padding: 0;
+    }
+  </style>
 </head>
 <body>
-
+  <div>vertical-align是用于对齐行行内元素的。即display为inline、inline-block、inline-table的元素</div>
+  <section>
+    <div class="title">行内元素的垂直对齐</div>
+    <div class="demo">
+      <span style="font-size: 12px;line-height: 12px;">aaa</span>
+    </div>
+    <div class="demo">
+      <span style="font-size: 12px;line-height: 12px;">ppp</span>
+    </div>
+    <div class="demo">
+      <span style="font-size: 12px;line-height: 12px;">bbb</span>
+    </div>
+    </div>
+  </section>
 </body>
 </html>
