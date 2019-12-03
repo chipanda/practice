@@ -5,7 +5,7 @@ function sort(arr = []) {
   for (let i = 0; i < arr.length - 1; i += 1) {
     let min = i;
     for (let j = i + 1; j < arr.length; j += 1) {
-      if (arr[j] < arr[i]) {
+      if (arr[j] < arr[min]) {
         min = j;
       }
     }

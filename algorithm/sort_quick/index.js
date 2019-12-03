@@ -1,18 +1,34 @@
+function quickSort(arr, from, end) {
+  if (from >= end) {
+    return arr;
+  }
+  let i = from;
+  let j = end;
+  while (i < j) {
+    while(i < j && arr[j] >= arr[i]) {
+      j -= 1;
+    }
+    if (j > i) {
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+      i += 1;
+    }
+    while(i < j && arr[i] <= arr[j]) {
+      i += 1;
+    }
+    if (j > i) {
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+      j -= 1;
+    }
+  }
+  quickSort(arr, from, i - 1);
+  quickSort(arr, i + 1, end);
+  return arr;
+}
 function sort(arr = []) {
   if (!Array.isArray(arr) || arr.length === 1) {
     return arr;
   }
-  for (let i = 0; i < arr.length - 1; i += 1) {
-    let min = i;
-    for (let j = i + 1; j < arr.length; j += 1) {
-      if (arr[j] < arr[i]) {
-        min = j;
-      }
-    }
-    if (min !== i) {
-      [arr[i], arr[min]] = [arr[min], arr[i]];
-    }
-  }
+  quickSort(arr, 0, arr.length - 1);
   return arr;
 }
 const test1 = [5, 4, 3, 2, 1];
