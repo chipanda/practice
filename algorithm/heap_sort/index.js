@@ -1,22 +1,30 @@
+function maxHeap(arr, cur, size) {
+  let leftIndex = 2 * cur + 1;
+  let rightIndex = 2 * cur + 2;
+  let maxIndex = cur;
+  if (leftIndex < size && arr[leftIndex] > arr[maxIndex]) {
+    maxIndex = leftIndex;
+  }
+  if (rightIndex < size && arr[rightIndex] > arr[maxIndex]) {
+    maxIndex = rightIndex;
+  }
+  if (maxIndex !== cur) {
+    [arr[maxIndex], arr[cur]] = [arr[cur], arr[maxIndex]];
+    maxHeap(arr, maxIndex, size); // 确保子树仍符合最大堆
+  }
+}
 function sort(arr = []) {
   if (!Array.isArray(arr) || arr.length === 1) {
     return arr;
   }
-  for (let n = arr.length; n > 1; n -= 1) {
-    let lastNotLeafIndex = Math.floor((n / 2) - 1);
-    for (let i = lastNotLeafIndex;i >= 0;i -= 1) {
-      let leftChild = 2 * i + 1;
-      let rightChild = 2 * i + 2;
-      if (leftChild < n && arr[leftChild] > arr[i]) {
-        [arr[leftChild], arr[i]] = [arr[i], arr[leftChild]];
-      }
-      if (rightChild < n && arr[rightChild] > arr[i]) {
-        [arr[rightChild], arr[i]] = [arr[i], arr[rightChild]];
-      }
-    }
-    [arr[n-1], arr[0]] = [arr[0], arr[n-1]];
+  // 先构造最大堆
+  for (let i = Math.floor(arr.length / 2) - 1; i >=0; i -=1) {
+    maxHeap(arr, i, arr.length);
   }
-  return arr;
+  for (let i = arr.length - 1; i > 0; i -= 1) {
+    [arr[i], arr[0]] = [arr[0], arr[i]];
+    maxHeap(arr, 0, i);
+  }
 }
 
 const test1 = [5, 4, 3, 2, 1];
